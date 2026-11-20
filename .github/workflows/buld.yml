@@ -21,7 +21,7 @@ jobs:
           npx cap init "Flip the Cards" com.flipthecards.game --web-dir www
           npx cap add android
           mkdir assets
-          convert icon-512.png -resize 1024x1024 assets/icon-only.png
+          sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick && convert icon-512.png -resize 1024x1024 assets/icon-only.png
           npx capacitor-assets generate --android --iconBackgroundColor '#3b2412' || true
           sed -i '0,/<activity/s//<activity android:screenOrientation="portrait"/' android/app/src/main/AndroidManifest.xml
           sed -i '/name="AppTheme.NoActionBar" parent/,/<\/style>/ s#</style>#    <item name="android:windowFullscreen">true</item>\n    <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>\n</style>#' android/app/src/main/res/values/styles.xml
